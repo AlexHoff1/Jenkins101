@@ -1,15 +1,12 @@
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+@Slf4j
 public class DefaultApplication {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(DefaultApplication.class);
-
     public static void main(String[] args){
-        LOGGER.debug("This is a debug message");
-        LOGGER.info("This is an info message");
-        LOGGER.warn("This is a warn message");
-        LOGGER.error("This is an error message");
+        log.debug("This is a debug message");
+        log.info("This is an info message");
+        log.warn("This is a warn message");
+        log.error("This is an error message");
     }
 }
