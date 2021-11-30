@@ -4,9 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DefaultApplication {
 
     public static void main(String[] args){
-        log.debug("This is a debug message");
-        log.info("This is an info message");
-        log.warn("This is a warn message");
+        log.info("Application starting");
         log.error("This is an error message");
     }
 }
