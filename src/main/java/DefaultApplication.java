@@ -12,19 +12,16 @@ public class DefaultApplication {
 
     public static void main(String[] args){
         log.info("Application starting");
-        log.error("This is an error message");
 
         // Find min/max/median
-        Stream<Integer> integerStream = Stream.of(1,3,2,4,7);
+        Stream<Integer> integerStream = Stream.of(1,3,2,4,7,19,-1,5,12);
         log.info(naiveSolution(integerStream).toString());
-        integerStream = Stream.of(1,3,2,4,7);
-        log.info(maxHeapMinHeap(integerStream).toString());
+        log.info(maxHeapMinHeap(Stream.of(1,3,2,4,7,19,-1,5,12)).toString());
     }
 
     public static List<Integer> naiveSolution(Stream<Integer> integerStream){
         // Naive solution, sorted list
-        List<Integer> sortedStream = integerStream.collect(Collectors.toList());
-
+        List<Integer> sortedStream = integerStream.sorted(Comparator.naturalOrder()).collect(Collectors.toList());
         List<Integer> results = new ArrayList<>();
         results.add(sortedStream.get(0));
         results.add(sortedStream.get(sortedStream.size()-1));
@@ -46,19 +43,20 @@ public class DefaultApplication {
         List<Integer> listForSimplicity = integerStream.collect(Collectors.toList());
         for (Integer next : listForSimplicity) {
             Integer minHeapValue = minHeap.peek();
-            boolean minHeapDestination = ((minHeapValue == null) || (minHeapValue <= next));
+            boolean minHeapDestination = ((minHeapValue == null) || (minHeapValue >= next));
             if (minHeapDestination) {
                 minHeap.add(next);
             } else {
                 maxHeap.add(next);
             }
 
-            // rebalance
-            if (minHeap.size() > (maxHeap.size() + 2)) {
+            // rebalance if necessary
+            if (minHeap.size() >= (maxHeap.size() + 1)) {
                 maxHeap.add(minHeap.poll());
-            } else if (minHeap.size() < (maxHeap.size() - 2)) {
+            } else if (minHeap.size() <= (maxHeap.size() - 1)) {
                 minHeap.add(maxHeap.poll());
             }
+            log.info(String.format("min heap: %d, max heap: %d", minHeap.size(), maxHeap.size()));
         }
 
         List<Integer> results = new ArrayList<>();
@@ -70,11 +68,16 @@ public class DefaultApplication {
         } else {
             median = (minHeap.peek() + maxHeap.peek())/2;
         }
+
         List<Integer> sortedMaxHeap = new ArrayList<>(maxHeap);
-        results.add(sortedMaxHeap.get(sortedMaxHeap.size()-1));
+        sortedMaxHeap.sort(Comparator.naturalOrder());
+        results.add(sortedMaxHeap.get(0));
         List<Integer> sortedMinHeap = new ArrayList<>(minHeap);
-        results.add(sortedMinHeap.get(0));
+        sortedMinHeap.sort(Comparator.naturalOrder());
+
+        results.add(sortedMinHeap.get(sortedMinHeap.size()-1));
         results.add(median);
+
         return results;
     }
 }
