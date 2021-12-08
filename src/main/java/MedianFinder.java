@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 @Slf4j
 public class MedianFinder {
 
+    // Naive solution, sorted list
     public List<Integer> naiveSolution(Stream<Integer> integerStream){
-        // Naive solution, sorted list
         List<Integer> sortedStream = integerStream.sorted(Comparator.naturalOrder()).collect(Collectors.toList());
         List<Integer> results = new ArrayList<>();
         results.add(sortedStream.get(0));
