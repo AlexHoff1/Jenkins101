@@ -18,7 +18,7 @@ public class NaiveStockPriceStatistics implements StockPriceStatistics {
         int numElements = allElements.size();
 
         if(numElements % 2 == 0){
-            return (allElements.get(numElements/2) + allElements.get((numElements/2) + 1))/2;
+            return (allElements.get(numElements/2) + allElements.get((numElements/2) - 1))/2;
         } else {
             return allElements.get(numElements/2);
         }

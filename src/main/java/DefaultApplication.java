@@ -10,11 +10,19 @@ public class DefaultApplication {
         log.info("Application starting");
 
         // Find min/max/median
-        NaiveStockPriceStatistics medianFinder = new NaiveStockPriceStatistics();
-        List<Integer> integerStream = Arrays.asList(1,3,2,4,7,19,-1,5,12);
+        StockPriceStatistics medianFinderNaive = new NaiveStockPriceStatistics();
+        StockPriceStatistics medianFinderOptimal = new NaiveStockPriceStatistics();
 
-        log.info(medianFinder.naiveSolution(integerStream.stream()).toString());
-        log.info(medianFinder.maxHeapMinHeap(integerStream.stream()).toString());
+        List<Integer> integerStream = Arrays.asList(1,3,2,4,7,19,-1,5,12);
+        for(Integer element: integerStream) {
+            medianFinderNaive.insert(element);
+            medianFinderOptimal.insert(element);
+            log.info("After adding {} the median is {} and {}",
+                    element,
+                    medianFinderNaive.findMedian(),
+                    medianFinderOptimal.findMedian());
+        }
+
     }
 
 }
