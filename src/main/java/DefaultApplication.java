@@ -10,7 +10,7 @@ public class DefaultApplication {
         log.info("Application starting");
 
         // Find min/max/median
-        MedianFinder medianFinder = new MedianFinder();
+        NaiveStockPriceStatistics medianFinder = new NaiveStockPriceStatistics();
         List<Integer> integerStream = Arrays.asList(1,3,2,4,7,19,-1,5,12);
 
         log.info(medianFinder.naiveSolution(integerStream.stream()).toString());

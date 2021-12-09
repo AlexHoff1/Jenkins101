@@ -10,23 +10,6 @@ import java.util.stream.Stream;
 @Slf4j
 public class MedianFinder {
 
-    // Naive solution, sorted list
-    public List<Integer> naiveSolution(Stream<Integer> integerStream){
-        List<Integer> sortedStream = integerStream.sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-        List<Integer> results = new ArrayList<>();
-        results.add(sortedStream.get(0));
-        results.add(sortedStream.get(sortedStream.size()-1));
-        int median;
-        if(sortedStream.size()%2==0){
-            median = sortedStream.get(sortedStream.size()/2); // round down
-        } else {
-            int location = sortedStream.size()==1 ? 0 : sortedStream.size()/2 - 1;
-            median = sortedStream.get(location);
-        }
-        results.add(median);
-        log.info(results.toString());
-        return results;
-    }
 
     public List<Integer> maxHeapMinHeap(Stream<Integer> integerStream) {
         // condition one: keep heaps balanced in size. Implement "rebalance"
